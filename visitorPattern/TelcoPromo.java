@@ -2,23 +2,25 @@ package visitorPattern;
 
 public class TelcoPromo {
     public static void main(String[] args) {
-        // Creating Telco instances
-        TelcoSubscription smart = new Telco("Smart", 500, 15, false);
-        TelcoSubscription globe = new Telco("Globe", 450, 10, true);
-        TelcoSubscription ditto = new Telco("Ditto", 400, 8, true);
+        TelcoSubscription smart = new Telco(15, 500, "Smart", false);
+        TelcoSubscription globe = new Telco(10, 450, "Globe", true);
+        TelcoSubscription ditto = new Telco(8, 400, "Ditto", true);
 
-        // Creating visitor instances
         UsagePromo promo = new TelcoAllowance();
         UnliCallOffer unli = new UnliCallTextPackage();
 
-        // Displaying data usage offers and prices
-        System.out.println("Smart Data Usage Offer and price: " + smart.accept(promo));
-        System.out.println("Globe Data Usage Offer and price: " + globe.accept(promo));
-        System.out.println("Ditto Data Usage Offer and price: " + ditto.accept(promo));
+        System.out.println("Smart Data Usage Offer and price: "
+                + promo.showAllowance(smart.getTelcoName(), smart.getPromoPrice()));
+        System.out.println("Globe Data Usage Offer and price: "
+                + promo.showAllowance(globe.getTelcoName(), globe.getPromoPrice()));
+        System.out.println("Ditto Data Usage Offer and price: "
+                + promo.showAllowance(ditto.getTelcoName(), ditto.getPromoPrice()));
 
-        // Displaying unlimited call and text offers
-        System.out.println("\nSmart unlimited calls and text package: " + smart.accept(unli));
-        System.out.println("Globe unlimited calls and text package: " + globe.accept(unli));
-        System.out.println("Ditto unlimited calls and text package: " + ditto.accept(unli));
+        System.out.println("\nSmart unlimited calls and text package: "
+                + unli.showUnliCallsTextOffer(smart.getTelcoName(), smart.getUnliCallText()));
+        System.out.println("Globe unlimited calls and text package: "
+                + unli.showUnliCallsTextOffer(globe.getTelcoName(), globe.getUnliCallText()));
+        System.out.println("Ditto unlimited calls and text package: "
+                + unli.showUnliCallsTextOffer(ditto.getTelcoName(), ditto.getUnliCallText()));
     }
 }

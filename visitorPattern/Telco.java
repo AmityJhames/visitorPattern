@@ -1,26 +1,15 @@
 package visitorPattern;
-
 public class Telco implements TelcoSubscription {
     private String telcoName;
     private double promoPrice;
-    private Integer dataAllowance;
+    private Integer dateAllowance;
     private boolean unliCallText;
 
-    public Telco(String telcoName, double promoPrice, Integer dataAllowance, boolean unliCallText) {
-        this.telcoName = telcoName;
+    public Telco(Integer dateAllowance, double promoPrice, String telcoName, boolean unliCallText) {
         this.promoPrice = promoPrice;
-        this.dataAllowance = dataAllowance;
+        this.dateAllowance = dateAllowance;
+        this.telcoName = telcoName;
         this.unliCallText = unliCallText;
-    }
-
-    @Override
-    public String accept(UsagePromo promo) {
-        return promo.showAllowance(telcoName, promoPrice);
-    }
-
-    @Override
-    public String accept(UnliCallOffer unli) {
-        return unli.showUnliCallsTextOffer(telcoName, unliCallText);
     }
 
     public String getTelcoName() {
@@ -32,11 +21,23 @@ public class Telco implements TelcoSubscription {
     }
 
     public Integer getDataAllowance() {
-        return dataAllowance;
+        return dateAllowance;
     }
 
     public boolean getUnliCallText() {
         return unliCallText;
     }
-}
 
+    @Override
+    public String accept(UsagePromo promo, double price) {
+        this.promoPrice = price;
+        return promo.showAllowance(telcoName, price);
+    }
+
+    @Override
+    public String accept(UnliCallOffer unli, boolean unliCallText) {
+        this.unliCallText = unliCallText;
+        return unli.showUnliCallsTextOffer(telcoName, unliCallText);
+    }
+
+}

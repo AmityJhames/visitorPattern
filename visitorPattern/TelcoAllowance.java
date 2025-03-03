@@ -3,17 +3,21 @@ package visitorPattern;
 import java.util.*;
 
 public class TelcoAllowance implements UsagePromo {
-    private static Map<String, Integer> allowances = new HashMap<>();
+
+    private static Map<String, Integer> tele = new HashMap<>();
 
     static {
-        allowances.put("Smart", 15);
-        allowances.put("Globe", 10);
-        allowances.put("Ditto", 8);
+        tele.put("Smart", 15);
+        tele.put("Globe", 10);
+        tele.put("Ditto", 8);
     }
 
     @Override
-    public String showAllowance(String telcoName, double money) {
-        Integer allowance = allowances.getOrDefault(telcoName, 0);
+    public String showAllowance(String telcomName, double money) {
+
+        Integer allowance = tele.getOrDefault(telcomName, 0);
+
         return allowance + " GB for a price of " + money + " pesos per month.";
+
     }
 }
